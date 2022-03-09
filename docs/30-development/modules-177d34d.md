@@ -2900,32 +2900,30 @@ By default every module has its own binary that is uploaded and deployed in spec
 > Multiple MTA Module Entries in the Deployment Descriptor \(`mtad.yaml`\)
 > 
 > > ### Sample Code:  
-> > ```
-> > 
+> > ```yaml
+> > ---
 > > _schema-version: "3.1.0"
 > > ID: hello
 > > version: 0.1.0
 > > 
 > > modules:
-> > - name: hello-router
-> > type: java.tomee
-> > path: web/router.war
-> > requires:
-> > - name: backend
-> > properties:
-> > backend: ~{url}/content
-> > name: backend
-> > url: ~{url}
-> > 
-> > - name: hello-backend
-> > type: java.tomee
-> > path: web/router.war
-> > provides:
-> > - name: backend
-> > properties:
-> > url: "${default-url}"
-> > 
-> > 
+> >   - name: hello-router
+> >     type: java.tomee
+> >     path: web/router.war
+> >     requires:
+> >     - name: backend
+> >       properties:
+> >         backend: ~{url}/content
+> >         name: backend
+> >         url: ~{url}
+> >        
+> >   - name: hello-backend
+> >     type: java.tomee
+> >     path: web/router.war
+> >     provides:
+> >       - name: backend
+> >         properties:
+> >           url: "${default-url}"
 > > ```
 
 If deployment is based on an MTA archive, it is not necessary to duplicate the code to have two different deployable modules; the specification for the MTA-module entry in `MANIFEST.MF` is extended, instead. The following \(incomplete\) example of a `MANIFEST.MF` shows how to use a comma-separated list of module names to associate one set of deployment artifacts with all listed modules:
